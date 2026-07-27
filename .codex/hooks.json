@@ -1,0 +1,30 @@
+{
+  "description": "Keep approved ERP documentation as the repository source of truth.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/bin/env python3 .codex/hooks/docs_source_of_truth.py",
+            "timeout": 3,
+            "statusMessage": "Loading documentation policy"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/bin/env python3 .codex/hooks/docs_source_of_truth.py",
+            "timeout": 3,
+            "statusMessage": "Checking documentation impact"
+          }
+        ]
+      }
+    ]
+  }
+}

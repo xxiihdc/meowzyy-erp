@@ -1,0 +1,4 @@
+interface:
+  display_name: "ERP Business Discovery"
+  short_description: "Clarify ERP operations before building"
+  default_prompt: "Use $erp-business-discovery to define the next ERP workflow slice."

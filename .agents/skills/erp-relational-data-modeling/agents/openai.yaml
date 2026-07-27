@@ -1,0 +1,4 @@
+interface:
+  display_name: "ERP Relational Data Modeling"
+  short_description: "Model approved ERP workflows safely"
+  default_prompt: "Use $erp-relational-data-modeling to document the approved workflow as a relational model."
