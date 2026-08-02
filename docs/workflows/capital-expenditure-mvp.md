@@ -18,15 +18,15 @@ Không bao gồm công nợ, trả góp, tệp chứng từ, SKU, nhà cung cấ
 ## Current and desired flow
 
 1. Người dùng tạo danh mục và chọn một cách xử lý bắt buộc.
-2. Người dùng ghi khoản tiền đã trả, ngày trả, danh mục, mô tả và mã chứng từ nếu có.
-3. Với danh mục tài sản, người dùng nhập số tháng sử dụng.
+2. Người dùng ghi khoản tiền đã trả, ngày trả, danh mục, mô tả và mã chứng từ nếu có; với vật phẩm đếm được, có thể ghi thêm số lượng và đơn vị tính tự do.
+3. Với danh mục tài sản, người dùng nhập số tháng sử dụng, trừ khi khoản chi có số lượng dương.
 4. Hệ thống hiển thị báo cáo tháng: tổng tiền thực tế đã chi, vốn nhập hàng đã chi và chi phí kỳ.
 5. Người dùng có thể sửa khoản chi; hệ thống lưu giá trị trước/sau. Danh mục đã dùng chỉ có thể ngừng sử dụng.
 
 ## Inputs and outputs
 
-- Input: ngày đã trả, số tiền VND, danh mục; mô tả/mã chứng từ là tùy chọn; số tháng sử dụng bắt buộc cho tài sản.
-- Output: danh sách khoản chi, lịch sử sửa và báo cáo theo tháng/danh mục/cách xử lý.
+- Input: ngày đã trả, số tiền VND, danh mục; mô tả/mã chứng từ, số lượng và đơn vị tính tự do của vật phẩm đếm được là tùy chọn; số tháng sử dụng bắt buộc cho tài sản, trừ khi khoản chi có số lượng dương.
+- Output: danh sách khoản chi, lịch sử sửa và báo cáo theo tháng/danh mục/cách xử lý; khi có số lượng, form và danh sách/chi tiết khoản chi hiển thị đơn giá tham chiếu.
 
 ## Business rules
 
@@ -38,6 +38,10 @@ Không bao gồm công nợ, trả góp, tệp chứng từ, SKU, nhà cung cấ
 - Chi phí kỳ gồm khoản `chi phí ngay` theo tháng đã trả và khấu hao của tài sản.
 - Tài sản khấu hao đều theo tháng dương lịch, bắt đầu từ tháng đã trả; số tiền còn lẻ được ghi nhận ở tháng cuối để tổng phân bổ đúng bằng số tiền mua.
 - Danh mục đã có khoản chi không được đổi cách xử lý hoặc xóa; chỉ được ngừng sử dụng.
+- Số lượng là tùy chọn và chỉ ghi cho vật phẩm có thể đếm được; không áp dụng cho khoản chi không theo đơn vị đếm.
+- Đơn vị tính là nội dung người dùng nhập tự do, tùy chọn và chỉ có cùng số lượng của vật phẩm đếm được.
+- Khoản chi thuộc danh mục tài sản có số lượng dương có thể để trống số tháng sử dụng. Khoản này là placeholder chờ phân bổ theo số đơn hàng trong tháng; trong phạm vi hiện tại, không được tự động tính vào chi phí kỳ.
+- Khi có số lượng, đơn giá tham chiếu được dẫn xuất bằng số tiền đã trả chia cho số lượng; chỉ hiển thị tại form và danh sách/chi tiết khoản chi, không làm thay đổi các báo cáo tháng.
 
 ## Exceptions and manual handling
 
@@ -57,6 +61,9 @@ Không bao gồm công nợ, trả góp, tệp chứng từ, SKU, nhà cung cấ
 - Danh mục quyết định cố định cách xử lý.
 - Không quản lý tồn kho/SKU trong MVP.
 - Chứng từ chỉ là mã tham chiếu hoặc ghi chú.
+- Số lượng chỉ dùng để ghi nhận khoản mua vật phẩm đếm được.
+- Đơn vị tính tự do và đơn giá tham chiếu chỉ phục vụ đối chiếu từng khoản chi; không dùng cho tồn kho, giá vốn hoặc báo cáo tháng trong MVP.
+- Khoản chi tài sản có số lượng nhưng không có số tháng sử dụng sẽ được phân bổ theo số đơn hàng trong tháng khi hệ thống có thống kê đơn hàng phù hợp; hiện chỉ ghi nhận placeholder và theo dõi như nợ kỹ thuật.
 
 ## Open questions
 

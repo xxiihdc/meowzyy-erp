@@ -26,3 +26,4 @@ MVP không có đăng nhập/phân quyền theo quyết định PM. Khi bổ sun
 - Danh mục đã được dùng chỉ được ngừng sử dụng; không xoá hoặc đổi cách xử lý.
 - Sửa khoản chi cập nhật giá trị hiện hành và thêm audit snapshot trước/sau; audit là append-only.
 - Chi phí kỳ là giá trị dẫn xuất: chi phí ngay theo tháng đã trả cộng khấu hao đều của tài sản; vốn nhập hàng không tham gia chỉ số này.
+- Khoản tài sản có số lượng nhưng không có số tháng sử dụng là placeholder chờ phân bổ theo số đơn hàng; vẫn tính vào tiền đã chi nhưng không tham gia khấu hao hoặc chi phí kỳ cho đến khi quy tắc phân bổ được triển khai.

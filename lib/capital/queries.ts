@@ -18,6 +18,8 @@ export type CapitalExpense = {
   description: string | null;
   reference_code: string | null;
   useful_life_months: number | null;
+  quantity: number | null;
+  unit_label: string | null;
   category: Pick<CapitalCategory, "name"> | null;
 };
 
@@ -26,6 +28,7 @@ export type CapitalSummary = {
   inventoryCapital: number;
   periodExpense: number;
   depreciation: number;
+  pendingOrderAllocation: number;
 };
 
 export type CapitalExpenseChange = {
@@ -56,7 +59,7 @@ export async function getCapitalExpenses(): Promise<CapitalExpense[]> {
   if (!supabase) return [];
   const { data, error } = await supabase
     .from("capital_expenses")
-    .select("id, category_id, treatment, paid_on, amount, description, reference_code, useful_life_months, category:capital_categories(name)")
+    .select("id, category_id, treatment, paid_on, amount, description, reference_code, useful_life_months, quantity, unit_label, category:capital_categories(name)")
     .order("paid_on", { ascending: false })
     .limit(100);
   if (error) throw new Error(`Không thể tải khoản chi: ${error.message}`);
@@ -68,7 +71,7 @@ export async function getCapitalExpense(id: string): Promise<CapitalExpense | nu
   if (!supabase) return null;
   const { data, error } = await supabase
     .from("capital_expenses")
-    .select("id, category_id, treatment, paid_on, amount, description, reference_code, useful_life_months, category:capital_categories(name)")
+    .select("id, category_id, treatment, paid_on, amount, description, reference_code, useful_life_months, quantity, unit_label, category:capital_categories(name)")
     .eq("id", id)
     .maybeSingle();
   if (error) throw new Error(`Không thể tải khoản chi: ${error.message}`);
@@ -107,12 +110,15 @@ function depreciationForMonth(expense: CapitalExpense, reportMonthIndex: number)
 
 export async function getCapitalSummary(month: string): Promise<CapitalSummary> {
   const [expenses, supabase] = await Promise.all([getCapitalExpenses(), Promise.resolve(createServerSupabaseClient())]);
-  if (!supabase) return { cashSpent: 0, inventoryCapital: 0, periodExpense: 0, depreciation: 0 };
+  if (!supabase) return { cashSpent: 0, inventoryCapital: 0, periodExpense: 0, depreciation: 0, pendingOrderAllocation: 0 };
   const { start, end, index } = monthBounds(month);
   const paidInMonth = expenses.filter((expense) => expense.paid_on >= start && expense.paid_on < end);
   const cashSpent = paidInMonth.reduce((total, expense) => total + Number(expense.amount), 0);
   const inventoryCapital = paidInMonth.filter((expense) => expense.treatment === "inventory_capital").reduce((total, expense) => total + Number(expense.amount), 0);
   const immediateExpense = paidInMonth.filter((expense) => expense.treatment === "immediate_expense").reduce((total, expense) => total + Number(expense.amount), 0);
   const depreciation = expenses.reduce((total, expense) => total + depreciationForMonth(expense, index), 0);
-  return { cashSpent, inventoryCapital, depreciation, periodExpense: immediateExpense + depreciation };
+  const pendingOrderAllocation = paidInMonth
+    .filter((expense) => expense.treatment === "depreciable_asset" && expense.quantity !== null && expense.useful_life_months === null)
+    .reduce((total, expense) => total + Number(expense.amount), 0);
+  return { cashSpent, inventoryCapital, depreciation, periodExpense: immediateExpense + depreciation, pendingOrderAllocation };
 }

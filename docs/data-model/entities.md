@@ -75,9 +75,9 @@
 - Row grain: Một lần chi tiền.
 - Owner / source of truth: Người dùng nội bộ; sửa tay là giá trị hiện hành.
 - Primary key: `id`.
-- Important attributes: ngày đã trả, số tiền, cách xử lý đã chụp, mô tả, mã chứng từ và số tháng sử dụng của tài sản.
+- Important attributes: ngày đã trả, số tiền, cách xử lý đã chụp, mô tả, mã chứng từ, số tháng sử dụng của tài sản, số lượng và đơn vị tính tự do tùy chọn của vật phẩm đếm được. Đơn giá tham chiếu là giá trị dẫn xuất từ số tiền đã trả chia cho số lượng, không lưu như một giá trị độc lập.
 - Relations: Thuộc một capital category; có nhiều capital expense changes.
-- Invariants and constraints: Số tiền dương; chỉ tài sản có số tháng sử dụng.
+- Invariants and constraints: Số tiền dương; số tháng sử dụng chỉ áp dụng cho tài sản và được yêu cầu trừ khi khoản chi có số lượng dương; số lượng chỉ có mặt khi khoản chi mua vật phẩm có thể đếm được và phải dương; đơn vị tính chỉ có mặt cùng số lượng. Tài sản có số lượng nhưng không có số tháng sử dụng là khoản chờ phân bổ theo số đơn hàng trong tháng và không được tự động tính vào chi phí kỳ hiện tại.
 - Lifecycle / mutability: Có thể sửa; mỗi sửa tạo audit trước/sau.
 - Audit and access considerations: Chưa có người sửa vì MVP chưa có auth.
 - Open questions: Không có.
