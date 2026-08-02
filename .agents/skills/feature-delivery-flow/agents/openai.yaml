@@ -1,0 +1,4 @@
+interface:
+  display_name: "Feature Delivery Flow"
+  short_description: "Drive a feature from discovery through validated delivery."
+  default_prompt: "Use $feature-delivery-flow to take this feature from requirements through planning, approval, implementation, and convergence."
