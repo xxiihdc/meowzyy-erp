@@ -1,0 +1,6 @@
+erDiagram
+  IMPORT_BATCH ||--o{ ORDER : "created or updated"
+  ORDER ||--o{ ORDER_LINE : contains
+  ORDER ||--o{ ORDER_FIELD_CHANGE : audited_by
+  CAPITAL_CATEGORY ||--o{ CAPITAL_EXPENSE : classifies
+  CAPITAL_EXPENSE ||--o{ CAPITAL_EXPENSE_CHANGE : audited_by
