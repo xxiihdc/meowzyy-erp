@@ -1,0 +1,4 @@
+interface:
+  display_name: "Read File Evidence"
+  short_description: "Evidence-first file analysis notes"
+  default_prompt: "Use $read-file-evidence to analyze selected project files and save an evidence-first note in docs/analysis/."
