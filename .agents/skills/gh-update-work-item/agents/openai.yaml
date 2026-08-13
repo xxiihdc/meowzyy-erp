@@ -1,0 +1,4 @@
+interface:
+  display_name: "Update GitHub Work Item"
+  short_description: "Update one existing GitHub Project work item."
+  default_prompt: "Use $gh-update-work-item to update this existing work item."

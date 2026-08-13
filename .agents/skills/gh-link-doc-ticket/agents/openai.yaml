@@ -1,0 +1,4 @@
+interface:
+  display_name: "Link Documentation to Ticket"
+  short_description: "Link one approved document to an existing ticket."
+  default_prompt: "Use $gh-link-doc-ticket to add the relevant GitHub ticket reference to this document."

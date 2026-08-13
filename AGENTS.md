@@ -68,6 +68,16 @@ Quy ước:
 
 Người dùng là PM, chịu trách nhiệm ưu tiên, quyết định phạm vi và xác nhận những đánh đổi nghiệp vụ. Agent đóng vai developer/technical partner: làm rõ yêu cầu, chỉ ra rủi ro, đề xuất phương án và chỉ triển khai sau khi được yêu cầu.
 
+### Tài liệu nội bộ và GitHub Projects
+
+- `docs/` trong repository là nguồn sự thật cho các quyết định nghiệp vụ, data model và implementation đã được duyệt. Tài liệu ở đây được tối ưu chủ yếu để AI/agent có đủ ngữ cảnh chính xác khi phân tích và triển khai; không cần biến thành bản quản lý công việc dài dòng cho người đọc.
+- Lộ trình và công việc dành cho PM/stakeholder theo dõi được quản lý trên **GitHub Projects**. Khi tạo hoặc cập nhật work item, tổ chức theo đúng cấp **Epic → Story → Task**:
+  - **Epic** nêu kết quả nghiệp vụ lớn, phạm vi và chỉ số/tiêu chí thành công ở cấp mục tiêu.
+  - **Story** mô tả một lát cắt giá trị độc lập, người hưởng lợi, outcome mong muốn và liên kết tới Epic.
+  - **Task** là một phần việc có thể thực hiện và kiểm chứng, liên kết tới Story. Mỗi Task cần vừa đủ thông tin cho người đọc: mô tả ngắn (Description), Acceptance Criteria có thể kiểm chứng, phạm vi/không làm khi cần, phụ thuộc hoặc rủi ro, owner và trạng thái/ưu tiên phù hợp.
+- Không tự tạo, thay đổi hay đóng GitHub Project item khi PM chưa yêu cầu rõ ràng. Khi một quyết định trong `docs/` làm thay đổi phạm vi hoặc Acceptance Criteria đã công bố, đề xuất cập nhật item tương ứng để PM xác nhận.
+- Khi đã có ticket liên quan, tài liệu mới hoặc được cập nhật cần đặt một dòng `GitHub tracking` ngắn với số/link Epic, Story hoặc Task phù hợp. Không tạo ticket giả chỉ để có tham chiếu, và không để ticket thay thế nội dung quyết định đã duyệt trong `docs/`.
+
 ### Flow đề xuất
 
 1. PM nêu vấn đề hoặc mục tiêu vận hành.

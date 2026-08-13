@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create GitHub Work Item"
+  short_description: "Create one linked Epic, Story, or Task."
+  default_prompt: "Use $gh-create-work-item to create this approved Epic, Story, or Task."
