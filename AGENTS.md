@@ -78,6 +78,7 @@ Người dùng là PM, chịu trách nhiệm ưu tiên, quyết định phạm v
 - Không tự tạo, thay đổi hay đóng GitHub Project item khi PM chưa yêu cầu rõ ràng. Khi một quyết định trong `docs/` làm thay đổi phạm vi hoặc Acceptance Criteria đã công bố, đề xuất cập nhật item tương ứng để PM xác nhận.
 - Khi đã có ticket liên quan, tài liệu mới hoặc được cập nhật cần đặt một dòng `GitHub tracking` ngắn với số/link Epic, Story hoặc Task phù hợp. Không tạo ticket giả chỉ để có tham chiếu, và không để ticket thay thế nội dung quyết định đã duyệt trong `docs/`.
 - Figma là nguồn tham chiếu thiết kế cho UI đã được PM duyệt; không thay thế `docs/` về nghiệp vụ, quy tắc dữ liệu hoặc phạm vi. Mọi ticket UI cần có link Figma và, khi có thể, node/frame cụ thể làm nguồn thiết kế.
+- Figma có thể không chính xác 100% về nội dung, thương hiệu, field, trạng thái hoặc metric. Khi có khác biệt, dùng Figma làm nguồn cho layout/presentation; `docs/` vẫn quyết định nghiệp vụ, data và hành vi. Ghi lại khác biệt trong một file `docs/analysis/` không-authoritative, rồi chỉ cập nhật Figma/docs khi PM xác nhận.
 - Trước khi triển khai hoặc thay đổi UI có Figma trong phạm vi, developer phải đọc design context bằng Figma plugin, đối chiếu với scope/ticket và xác nhận node/frame mục tiêu. Không tự suy diễn yêu cầu UI từ canvas chưa được PM chỉ định.
 - Khi hoàn tất thay đổi UI, ticket cần được cập nhật với link Figma đã dùng, phạm vi màn hình/component đã đối chiếu và cách xác minh. Nếu thiết kế và hành vi đã duyệt mâu thuẫn, dừng để PM quyết định; không tự ưu tiên một nguồn.
 
