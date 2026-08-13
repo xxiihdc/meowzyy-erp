@@ -1,0 +1,4 @@
+interface:
+  display_name: "Playwright UI Evidence"
+  short_description: "Capture local UI screenshots for verification."
+  default_prompt: "Use $playwright-ui-evidence to validate a local route and prepare screenshot evidence."
