@@ -16,8 +16,9 @@ Create one item only. Do not update existing items, alter Project settings, or e
    - **Story:** role, desired capability, outcome, scope, and parent Epic.
    - **Task:** Description, testable Acceptance Criteria, scope/exclusions, dependencies or risks, and parent Story.
 4. Draft the issue body below. Do not invent owners, priorities, dates, estimates, labels, acceptance criteria, or business facts. Ask the PM when they are missing and material.
-5. Create the issue with explicit `--repo`, then add it to the specified Project with `gh project item-add`. Set only fields that already exist and whose values were confirmed.
-6. Re-read the issue and Project item, then report the issue URL/number, parent link, Project item ID, and values set.
+5. Create the issue with explicit `--repo`. When it has an approved parent, create the native GitHub hierarchy in the same operation with `gh issue create --parent <number>` or immediately afterwards with `gh issue edit <child> --parent <parent>`. Text references such as `Parent Story: #<number>` do not replace the native relationship.
+6. Add the issue to the specified Project with `gh project item-add`. Set only fields that already exist and whose values were confirmed.
+7. Re-read the issue and Project item, confirm the native parent/sub-issue relationship, then report the issue URL/number, parent link, Project item ID, and values set.
 
 ## Issue-body templates
 

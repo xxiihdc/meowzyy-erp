@@ -16,6 +16,8 @@ Coordinate one feature at a time. Treat `docs/` as the authority for approved wo
 - Do not write application code, migrations, configuration, accounts, or external changes until the PM explicitly approves implementation after seeing the plan and tasks.
 - When a PM-approved business rule, workflow, entity, relationship, lifecycle, or implementation behavior changes, update the applicable `docs/` artifact in the same task. Do not make that update before PM confirmation.
 - Do not use parallel agents for this workflow. Its stages are stateful and depend on the same active feature artifacts.
+- GitHub Projects is the PM-facing tracker. Once the scope is approved enough to track, create or update the appropriate Epic, Story, or Task only with PM authorization; establish the native GitHub parent/sub-issue relationship for Epic → Story → Task and link the approved artefacts back to that work item. Body-text references alone are not sufficient hierarchy.
+- For UI work, Figma is the approved visual reference when a PM supplies a Figma link or node. Read the target through the Figma plugin before planning or implementation; record the file URL and target node/frame in the task. Figma must not be used to invent business rules.
 
 ## Workflow
 
@@ -27,13 +29,13 @@ Coordinate one feature at a time. Treat `docs/` as the authority for approved wo
 
 4. **Model and plan.** When the confirmed workflow introduces or changes relational data rules, invoke `$erp-relational-data-modeling` before planning and update the appropriate `docs/data-model/` files only with approved facts. Then invoke `$speckit-plan`. For a technical library, SDK, framework, cloud service, API, CLI, or version-sensitive decision, fetch current official documentation through Context7 before finalizing that decision.
 
-5. **Make the work executable.** Invoke `$speckit-tasks`, then `$speckit-analyze`. Resolve any artifact inconsistency before implementation; ask the PM when resolving it changes scope, business facts, or a meaningful trade-off. Summarize the agreed scope, key decisions, risks, and task count.
+5. **Make the work executable.** Invoke `$speckit-tasks`, then `$speckit-analyze`. Resolve any artifact inconsistency before implementation; ask the PM when resolving it changes scope, business facts, or a meaningful trade-off. Create or update the approved GitHub Projects work item and add its reference to the relevant artefact. For UI work, include the inspected Figma file URL and target node/frame in the task. Summarize the agreed scope, key decisions, risks, and task count.
 
 6. **Approval gate.** Ask the PM for explicit approval to implement the validated plan. A feature request alone is not implementation approval. State which feature artifacts will guide the work and call out any pending assumption. Stop here until the PM approves.
 
 7. **Implement and converge.** After explicit approval, invoke `$speckit-implement`. Invoke `$speckit-converge` afterward. If convergence appends tasks, invoke `$speckit-implement` again and repeat until it reports convergence. If a new material business decision appears, stop and ask the PM rather than guessing.
 
-8. **Hand off.** Report delivered behavior, updated documents, verification performed, remaining assumptions or out-of-scope work, and the smallest sensible next step.
+8. **Hand off.** Report delivered behavior, updated documents, verification performed, GitHub tracking, Figma references reviewed for UI work, remaining assumptions or out-of-scope work, and the smallest sensible next step.
 
 ## Status format
 

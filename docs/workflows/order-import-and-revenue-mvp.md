@@ -1,5 +1,7 @@
 # Import đơn hàng và báo cáo doanh thu MVP
 
+GitHub tracking: [Epic #1](https://github.com/xxiihdc/meowzyy-erp/issues/1) · [Story #2](https://github.com/xxiihdc/meowzyy-erp/issues/2) · [Task #4](https://github.com/xxiihdc/meowzyy-erp/issues/4)
+
 ## Goal
 
 Tập trung dữ liệu đơn hàng xuất từ Shopee và TikTok Shop để một người dùng nội bộ có thể xem đơn, chỉnh sửa khi cần và theo dõi tiền sàn chuyển theo ngày hoàn tất.

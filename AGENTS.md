@@ -68,7 +68,7 @@ Quy ước:
 
 Người dùng là PM, chịu trách nhiệm ưu tiên, quyết định phạm vi và xác nhận những đánh đổi nghiệp vụ. Agent đóng vai developer/technical partner: làm rõ yêu cầu, chỉ ra rủi ro, đề xuất phương án và chỉ triển khai sau khi được yêu cầu.
 
-### Tài liệu nội bộ và GitHub Projects
+### Tài liệu nội bộ, GitHub Projects và Figma
 
 - `docs/` trong repository là nguồn sự thật cho các quyết định nghiệp vụ, data model và implementation đã được duyệt. Tài liệu ở đây được tối ưu chủ yếu để AI/agent có đủ ngữ cảnh chính xác khi phân tích và triển khai; không cần biến thành bản quản lý công việc dài dòng cho người đọc.
 - Lộ trình và công việc dành cho PM/stakeholder theo dõi được quản lý trên **GitHub Projects**. Khi tạo hoặc cập nhật work item, tổ chức theo đúng cấp **Epic → Story → Task**:
@@ -77,15 +77,19 @@ Người dùng là PM, chịu trách nhiệm ưu tiên, quyết định phạm v
   - **Task** là một phần việc có thể thực hiện và kiểm chứng, liên kết tới Story. Mỗi Task cần vừa đủ thông tin cho người đọc: mô tả ngắn (Description), Acceptance Criteria có thể kiểm chứng, phạm vi/không làm khi cần, phụ thuộc hoặc rủi ro, owner và trạng thái/ưu tiên phù hợp.
 - Không tự tạo, thay đổi hay đóng GitHub Project item khi PM chưa yêu cầu rõ ràng. Khi một quyết định trong `docs/` làm thay đổi phạm vi hoặc Acceptance Criteria đã công bố, đề xuất cập nhật item tương ứng để PM xác nhận.
 - Khi đã có ticket liên quan, tài liệu mới hoặc được cập nhật cần đặt một dòng `GitHub tracking` ngắn với số/link Epic, Story hoặc Task phù hợp. Không tạo ticket giả chỉ để có tham chiếu, và không để ticket thay thế nội dung quyết định đã duyệt trong `docs/`.
+- Figma là nguồn tham chiếu thiết kế cho UI đã được PM duyệt; không thay thế `docs/` về nghiệp vụ, quy tắc dữ liệu hoặc phạm vi. Mọi ticket UI cần có link Figma và, khi có thể, node/frame cụ thể làm nguồn thiết kế.
+- Trước khi triển khai hoặc thay đổi UI có Figma trong phạm vi, developer phải đọc design context bằng Figma plugin, đối chiếu với scope/ticket và xác nhận node/frame mục tiêu. Không tự suy diễn yêu cầu UI từ canvas chưa được PM chỉ định.
+- Khi hoàn tất thay đổi UI, ticket cần được cập nhật với link Figma đã dùng, phạm vi màn hình/component đã đối chiếu và cách xác minh. Nếu thiết kế và hành vi đã duyệt mâu thuẫn, dừng để PM quyết định; không tự ưu tiên một nguồn.
 
 ### Flow đề xuất
 
-1. PM nêu vấn đề hoặc mục tiêu vận hành.
+1. PM nêu vấn đề hoặc mục tiêu vận hành; với công việc UI, cung cấp link Figma và node/frame mục tiêu nếu đã có.
 2. Developer tóm tắt nghiệp vụ, nêu câu hỏi/rủi ro còn thiếu và đề xuất lát cắt nhỏ nhất để làm.
 3. PM xác nhận phạm vi, quy tắc nghiệp vụ và tiêu chí hoàn thành.
-4. Developer đưa phương án kỹ thuật ngắn gọn, bao gồm ảnh hưởng dữ liệu, bảo mật và các đánh đổi cần PM quyết định.
-5. Chỉ sau yêu cầu triển khai rõ ràng, developer mới viết code/migration/cấu hình.
-6. Sau khi hoàn thành, developer báo phần đã làm, cách kiểm tra, giả định còn mở và đề xuất bước tiếp theo.
+4. Developer tạo hoặc cập nhật work item trên GitHub Projects theo cấp Epic → Story → Task đã thống nhất, rồi liên kết artefact/ticket khi có.
+5. Developer đưa phương án kỹ thuật ngắn gọn, bao gồm ảnh hưởng dữ liệu, bảo mật, nguồn Figma cho UI và các đánh đổi cần PM quyết định.
+6. Chỉ sau yêu cầu triển khai rõ ràng, developer mới viết code/migration/cấu hình hoặc sửa Figma.
+7. Sau khi hoàn thành, developer báo phần đã làm, cách kiểm tra, link ticket/Figma đã đối chiếu, giả định còn mở và đề xuất bước tiếp theo.
 
 ### Điểm cần chuẩn hoá sớm
 
