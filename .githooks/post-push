@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -u
+
+repo_root="$(git rev-parse --show-toplevel)"
+exec "$repo_root/.codex/hooks/complete-linked-tasks-on-main.sh" "$@"
