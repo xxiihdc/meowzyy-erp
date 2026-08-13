@@ -1,150 +1,70 @@
+import Link from "next/link";
 import {
-  ArrowUpRight,
-  CalendarDays,
+  Bell,
   ChartNoAxesCombined,
+  ChevronRight,
   CircleDollarSign,
   FileSpreadsheet,
   LayoutDashboard,
   Package,
   ReceiptText,
+  Settings,
   ShoppingBag,
 } from "lucide-react";
-import Link from "next/link";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { getRecentOrders, getRevenueSummary } from "@/lib/orders/queries";
 
 export const dynamic = "force-dynamic";
 
-const currency = new Intl.NumberFormat("vi-VN", {
-  style: "currency",
-  currency: "VND",
-  maximumFractionDigits: 0,
-});
+const currency = new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND", maximumFractionDigits: 0 });
 
 const marketplaceLabel = {
   shopee: "Shopee",
   tiktok_shop: "TikTok Shop",
 } as const;
 
-const navigation = [
-  { label: "Tổng quan", icon: LayoutDashboard, active: true, href: "/" },
-  { label: "Đơn hàng", icon: ReceiptText },
-  { label: "Sản phẩm", icon: Package },
-  { label: "Báo cáo", icon: ChartNoAxesCombined },
-  { label: "Chi vốn", icon: CircleDollarSign, href: "/capital" },
-];
+const metricCardClassName = "rounded-lg border-[#c6c6cd] shadow-[0_1px_1px_rgba(0,0,0,0.05)]";
 
 export default async function Home() {
   const [orders, revenue] = await Promise.all([getRecentOrders(), getRevenueSummary()]);
 
   return (
-    <main className="min-h-screen bg-[#f7f7f5] text-slate-950">
-      <div className="mx-auto flex min-h-screen max-w-[1440px]">
-        <aside className="hidden w-64 shrink-0 border-r border-slate-200 bg-white p-5 lg:flex lg:flex-col">
-          <div className="flex items-center gap-3 px-2 py-3">
-            <div className="grid size-9 place-items-center rounded-xl bg-slate-950 text-sm font-bold text-white">M</div>
-            <div>
-              <p className="font-semibold tracking-tight">Meowzyy ERP</p>
-              <p className="text-xs text-slate-500">Bán hàng đa sàn</p>
-            </div>
-          </div>
-          <nav className="mt-10 space-y-1">
-            {navigation.map(({ label, icon: Icon, active, href }) => (
-              href ? <Link href={href} className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium ${active ? "bg-slate-950 text-white" : "text-slate-500 hover:bg-slate-100 hover:text-slate-950"}`} key={label}>
-                <Icon className="size-4" />{label}
-              </Link> : <div className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-500" key={label}>
-                <Icon className="size-4" />{label}
-              </div>
-            ))}
-          </nav>
-          <div className="mt-auto rounded-xl bg-amber-50 p-4">
-            <FileSpreadsheet className="size-5 text-amber-700" />
-            <p className="mt-3 text-sm font-medium">Import Excel</p>
-            <p className="mt-1 text-xs leading-5 text-slate-600">Đang chờ xác minh file mẫu từ các sàn.</p>
-            <Badge className="mt-3" variant="outline">Pending</Badge>
-          </div>
-        </aside>
+    <main className="min-h-screen bg-[#f8f9ff] text-[#0b1c30]">
+      <aside className="fixed inset-y-0 left-0 z-20 hidden w-[280px] border-r border-slate-200 bg-white px-6 py-6 lg:flex lg:flex-col">
+        <Link className="flex items-center gap-4" href="/"><div className="grid size-10 place-items-center rounded-md bg-[#0051d5] text-sm font-bold text-white">M</div><div><p className="text-lg font-semibold leading-6 tracking-tight">Meowzyy ERP</p><p className="text-xs text-slate-500">Bán hàng đa sàn</p></div></Link>
+        <nav className="mt-8 space-y-3 text-sm font-medium">
+          <Link aria-current="page" className="flex h-11 items-center gap-4 rounded-sm bg-[#e8f0ff] px-4 text-[#0051d5]" href="/"><LayoutDashboard className="size-[18px]" />Tổng quan</Link>
+          <span className="flex h-11 items-center gap-4 rounded-sm px-4 text-slate-400"><ReceiptText className="size-[18px]" />Đơn hàng</span>
+          <span className="flex h-11 items-center gap-4 rounded-sm px-4 text-slate-400"><Package className="size-[18px]" />Sản phẩm</span>
+          <span className="flex h-11 items-center gap-4 rounded-sm px-4 text-slate-400"><ChartNoAxesCombined className="size-[18px]" />Báo cáo</span>
+          <Link className="flex h-11 items-center gap-4 rounded-sm px-4 text-slate-600 hover:bg-slate-50" href="/capital"><CircleDollarSign className="size-[18px]" />Chi vốn</Link>
+        </nav>
+        <div className="mt-auto border-t border-slate-100 pt-5"><span className="flex h-10 items-center gap-4 px-4 text-sm font-medium text-slate-500"><Settings className="size-[18px]" />Cài đặt</span></div>
+      </aside>
 
-        <div className="min-w-0 flex-1">
-          <header className="flex h-20 items-center justify-between border-b border-slate-200 bg-white px-6 md:px-10">
-            <div className="lg:hidden"><p className="font-semibold">Meowzyy ERP</p><p className="text-xs text-slate-500">Tổng quan</p></div>
-            <div className="hidden lg:block"><p className="text-sm text-slate-500">Xin chào,</p><p className="font-semibold">Tổng quan vận hành</p></div>
-            <div className="flex items-center gap-3">
-              <Badge variant="secondary" className="hidden sm:inline-flex">MVP · Nội bộ</Badge>
-              <div className="grid size-9 place-items-center rounded-full bg-slate-100 text-sm font-semibold text-slate-600">M</div>
-            </div>
-          </header>
+      <div className="lg:pl-[280px]">
+        <header className="flex h-16 items-center justify-between border-b border-slate-200 bg-white px-5 md:px-8"><div className="flex items-center gap-3 lg:hidden"><div className="grid size-8 place-items-center rounded bg-[#0051d5] text-xs font-bold text-white">M</div><p className="font-semibold">Meowzyy ERP</p></div><p className="hidden text-sm text-slate-500 lg:block">Quản lý vận hành</p><div className="flex items-center gap-4 text-slate-500"><Bell className="size-5" /><div className="grid size-8 place-items-center rounded-full bg-slate-200 text-xs font-semibold text-slate-600">M</div></div></header>
 
-          <div className="p-6 md:p-10">
-            <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
-              <div>
-                <p className="text-sm font-medium text-amber-700">Doanh thu đã hoàn tất</p>
-                <h1 className="mt-1 text-3xl font-semibold tracking-tight">Bức tranh bán hàng</h1>
-                <p className="mt-2 text-sm text-slate-500">Theo tiền sàn chuyển và ngày hoàn tất đơn.</p>
-              </div>
-              <Button disabled size="lg" className="w-full md:w-auto"><FileSpreadsheet data-icon="inline-start" /> Import Excel <Badge variant="secondary">Sắp có</Badge></Button>
-            </div>
+        <div className="mx-auto max-w-[1440px] p-5 md:p-8">
+          <header><h1 className="text-2xl font-semibold tracking-tight">Tổng quan</h1><p className="mt-1 text-sm text-[#45464d]">Tổng hợp tiền sàn chuyển và đơn hoàn tất trên các sàn.</p></header>
 
-            <section className="mt-8 grid gap-4 md:grid-cols-2">
-              <Card className="border-0 bg-slate-950 text-white ring-0">
-                <CardHeader>
-                  <CardDescription className="text-slate-400">Tiền sàn chuyển</CardDescription>
-                  <CardTitle className="text-3xl font-semibold tracking-tight">{currency.format(revenue.payout)}</CardTitle>
-                </CardHeader>
-                <CardContent className="flex items-center gap-2 text-sm text-slate-300"><CircleDollarSign className="size-4" /> Chỉ tính đơn hoàn tất</CardContent>
-              </Card>
-              <Card className="border-0 bg-white shadow-sm ring-1 ring-slate-200">
-                <CardHeader>
-                  <CardDescription>Số đơn hoàn tất</CardDescription>
-                  <CardTitle className="text-3xl font-semibold tracking-tight">{revenue.completedOrderCount}</CardTitle>
-                </CardHeader>
-                <CardContent className="flex items-center gap-2 text-sm text-slate-500"><ShoppingBag className="size-4" /> Shopee và TikTok Shop</CardContent>
-              </Card>
-            </section>
+          <section className="mt-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+            <Card className={metricCardClassName}><CardHeader className="p-[18px] pb-2"><div className="flex items-center justify-between"><CardDescription className="text-xs font-semibold uppercase tracking-[0.06em] text-[#45464d]">Tiền sàn chuyển</CardDescription><CircleDollarSign className="size-5 text-[#0051d5]" /></div><CardTitle className="pt-3 text-3xl font-bold tracking-tight">{currency.format(revenue.payout)}</CardTitle></CardHeader><CardContent className="p-[18px] pt-1"><p className="inline-flex rounded-sm bg-[#eff4ff] px-2 py-1 text-xs font-semibold text-[#0051d5]">Đơn hoàn tất</p></CardContent></Card>
+            <Card className={metricCardClassName}><CardHeader className="p-[18px] pb-2"><div className="flex items-center justify-between"><CardDescription className="text-xs font-semibold uppercase tracking-[0.06em] text-[#45464d]">Đơn hoàn tất</CardDescription><ShoppingBag className="size-5 text-[#0051d5]" /></div><CardTitle className="pt-3 text-3xl font-bold tracking-tight">{revenue.completedOrderCount}</CardTitle></CardHeader><CardContent className="p-[18px] pt-1"><p className="inline-flex rounded-sm bg-[#eff4ff] px-2 py-1 text-xs font-semibold text-[#0051d5]">Shopee + TikTok Shop</p></CardContent></Card>
+            <Card className={metricCardClassName}><CardHeader className="p-[18px] pb-2"><div className="flex items-center justify-between"><CardDescription className="text-xs font-semibold uppercase tracking-[0.06em] text-[#45464d]">Nguồn dữ liệu</CardDescription><FileSpreadsheet className="size-5 text-slate-500" /></div><CardTitle className="pt-3 text-xl font-semibold tracking-tight">Chờ import</CardTitle></CardHeader><CardContent className="p-[18px] pt-1"><p className="inline-flex rounded-sm bg-slate-100 px-2 py-1 text-xs font-semibold text-slate-600">File mẫu chưa xác minh</p></CardContent></Card>
+            <Card className={metricCardClassName}><CardHeader className="p-[18px] pb-2"><div className="flex items-center justify-between"><CardDescription className="text-xs font-semibold uppercase tracking-[0.06em] text-[#45464d]">Báo cáo chi tiết</CardDescription><ChartNoAxesCombined className="size-5 text-slate-500" /></div><CardTitle className="pt-3 text-xl font-semibold tracking-tight">Chưa thiết lập</CardTitle></CardHeader><CardContent className="p-[18px] pt-1"><p className="inline-flex rounded-sm bg-slate-100 px-2 py-1 text-xs font-semibold text-slate-600">Theo ngày · sàn · SKU</p></CardContent></Card>
+          </section>
 
-            <section className="mt-8 grid gap-4 xl:grid-cols-[1.7fr_0.8fr]">
-              <Card className="border-0 bg-white shadow-sm ring-1 ring-slate-200">
-                <CardHeader className="border-b border-slate-100">
-                  <CardTitle>Đơn hàng mới cập nhật</CardTitle>
-                  <CardDescription>Danh sách sẽ được cập nhật sau mỗi lần import.</CardDescription>
-                </CardHeader>
-                <CardContent className="px-0">
-                  {orders.length === 0 ? (
-                    <div className="grid min-h-56 place-items-center px-6 text-center">
-                      <div><div className="mx-auto grid size-11 place-items-center rounded-full bg-slate-100"><ReceiptText className="size-5 text-slate-500" /></div><p className="mt-3 font-medium">Chưa có đơn hàng</p><p className="mt-1 max-w-xs text-sm text-slate-500">Dữ liệu sẽ xuất hiện ở đây sau khi phần import Excel được hoàn tất.</p></div>
-                    </div>
-                  ) : (
-                    <Table>
-                      <TableHeader><TableRow><TableHead className="pl-6">Sàn</TableHead><TableHead>Mã đơn</TableHead><TableHead>Trạng thái</TableHead><TableHead>Hoàn tất</TableHead><TableHead className="pr-6 text-right">Tiền sàn chuyển</TableHead></TableRow></TableHeader>
-                      <TableBody>{orders.map((order) => <TableRow key={order.id}><TableCell className="pl-6 font-medium">{marketplaceLabel[order.marketplace]}</TableCell><TableCell>{order.marketplace_order_id}</TableCell><TableCell><Badge variant="secondary">{order.raw_status}</Badge></TableCell><TableCell>{order.completed_at ? new Date(order.completed_at).toLocaleDateString("vi-VN") : "—"}</TableCell><TableCell className="pr-6 text-right font-medium">{order.marketplace_payout === null ? "—" : currency.format(Number(order.marketplace_payout))}</TableCell></TableRow>)}</TableBody>
-                    </Table>
-                  )}
-                </CardContent>
-              </Card>
+          <section className="mt-6 grid gap-6 xl:grid-cols-3">
+            <Card className={`xl:col-span-2 ${metricCardClassName}`}><CardHeader className="flex-row items-center justify-between p-6"><div><CardTitle className="text-xl">Tiền sàn chuyển</CardTitle><CardDescription className="mt-1">Phân rã theo ngày và sàn sẽ có sau khi import được xác minh.</CardDescription></div><Badge variant="outline" className="border-[#c6c6cd] bg-[#f8f9ff] text-slate-600">MVP</Badge></CardHeader><CardContent className="p-6 pt-0"><div className="grid min-h-64 place-items-center border-b border-l border-dashed border-[#c6c6cd] text-center"><div><ChartNoAxesCombined className="mx-auto size-8 text-slate-300" /><p className="mt-3 text-sm font-medium text-slate-700">Chưa có dữ liệu biểu đồ</p><p className="mt-1 max-w-sm text-sm leading-6 text-slate-500">Không dùng số liệu Revenue, Cost, Profit hoặc ROI mẫu từ Figma vì các chỉ số này chưa thuộc scope MVP.</p></div></div></CardContent></Card>
+            <Card className={metricCardClassName}><CardHeader className="p-6"><div className="grid size-10 place-items-center rounded-md bg-[#eff4ff]"><FileSpreadsheet className="size-5 text-[#0051d5]" /></div><CardTitle className="mt-4 text-xl">Bước tiếp theo</CardTitle><CardDescription className="mt-1 leading-6">Xác minh file export từ Shopee và TikTok Shop trước khi bật import.</CardDescription></CardHeader><CardContent className="p-6 pt-0"><ul className="space-y-3 text-sm text-slate-700"><li className="flex gap-2"><span className="mt-2 size-1.5 shrink-0 rounded-full bg-[#0051d5]" />Mapping cột và định dạng dữ liệu</li><li className="flex gap-2"><span className="mt-2 size-1.5 shrink-0 rounded-full bg-[#0051d5]" />Trạng thái được tính hoàn tất</li><li className="flex gap-2"><span className="mt-2 size-1.5 shrink-0 rounded-full bg-[#0051d5]" />Tiền sàn chuyển theo từng đơn</li></ul><Button disabled variant="outline" className="mt-6 w-full rounded-sm">Import Excel <ChevronRight className="size-4" /></Button></CardContent></Card>
+          </section>
 
-              <Card className="border-0 bg-amber-50 shadow-sm ring-1 ring-amber-200">
-                <CardHeader><div className="flex size-10 items-center justify-center rounded-xl bg-amber-100"><CalendarDays className="size-5 text-amber-800" /></div><CardTitle className="mt-3">Bước tiếp theo</CardTitle><CardDescription className="leading-6 text-slate-600">Xác minh file export của Shopee và TikTok Shop trước khi bật import.</CardDescription></CardHeader>
-                <CardContent><ul className="space-y-3 text-sm text-slate-700"><li className="flex gap-2"><span className="mt-1 size-1.5 rounded-full bg-amber-700" />Mapping cột và định dạng dữ liệu</li><li className="flex gap-2"><span className="mt-1 size-1.5 rounded-full bg-amber-700" />Trạng thái được tính hoàn tất</li><li className="flex gap-2"><span className="mt-1 size-1.5 rounded-full bg-amber-700" />Giá trị tiền sàn chuyển</li></ul><Button variant="outline" className="mt-6 w-full" disabled>Xem hướng dẫn <ArrowUpRight data-icon="inline-end" /></Button></CardContent>
-              </Card>
-            </section>
-          </div>
+          <section className={`mt-6 ${metricCardClassName} rounded-lg bg-white`}><CardHeader className="border-b border-slate-200 p-6"><CardTitle className="text-xl">Đơn hàng mới cập nhật</CardTitle><CardDescription className="mt-1">Danh sách được cập nhật sau mỗi lần import.</CardDescription></CardHeader><CardContent className="p-0">{orders.length === 0 ? <div className="grid min-h-64 place-items-center px-6 text-center"><div><ReceiptText className="mx-auto size-8 text-slate-300" /><p className="mt-3 font-medium">Chưa có đơn hàng</p><p className="mt-1 max-w-xs text-sm leading-6 text-slate-500">Dữ liệu sẽ xuất hiện sau khi phần import Excel được hoàn tất.</p></div></div> : <div className="overflow-x-auto"><Table><TableHeader><TableRow className="bg-slate-50"><TableHead className="pl-6">Sàn</TableHead><TableHead>Mã đơn</TableHead><TableHead>Trạng thái</TableHead><TableHead>Hoàn tất</TableHead><TableHead className="pr-6 text-right">Tiền sàn chuyển</TableHead></TableRow></TableHeader><TableBody>{orders.map((order) => <TableRow className="h-16" key={order.id}><TableCell className="pl-6 font-medium">{marketplaceLabel[order.marketplace]}</TableCell><TableCell>{order.marketplace_order_id}</TableCell><TableCell><Badge variant="secondary">{order.raw_status}</Badge></TableCell><TableCell>{order.completed_at ? new Date(order.completed_at).toLocaleDateString("vi-VN") : "—"}</TableCell><TableCell className="pr-6 text-right font-medium">{order.marketplace_payout === null ? "—" : currency.format(Number(order.marketplace_payout))}</TableCell></TableRow>)}</TableBody></Table></div>}</CardContent></section>
         </div>
       </div>
     </main>
