@@ -1,6 +1,6 @@
 # Import đơn hàng và báo cáo doanh thu MVP
 
-GitHub tracking: [Epic #1](https://github.com/xxiihdc/meowzyy-erp/issues/1) · [Story #2](https://github.com/xxiihdc/meowzyy-erp/issues/2) · [Task #4 (completed)](https://github.com/xxiihdc/meowzyy-erp/issues/4) · [Task #6 (deferred)](https://github.com/xxiihdc/meowzyy-erp/issues/6)
+GitHub tracking: [Epic #1](https://github.com/xxiihdc/meowzyy-erp/issues/1) · [Story #2](https://github.com/xxiihdc/meowzyy-erp/issues/2) · [Task #4 (completed)](https://github.com/xxiihdc/meowzyy-erp/issues/4) · [Task #6 (deferred)](https://github.com/xxiihdc/meowzyy-erp/issues/6) · [Task #7 (implementation)](https://github.com/xxiihdc/meowzyy-erp/issues/7)
 
 ## Goal
 
