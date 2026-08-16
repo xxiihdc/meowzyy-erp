@@ -9,12 +9,14 @@ Model này phục vụ workflow đã duyệt tại `docs/workflows/order-import-
 - **Đơn (order):** một giao dịch có một mã đơn do một sàn cấp.
 - **Dòng đơn (order line):** một sản phẩm/SKU trong một đơn; đây là grain của báo cáo sản phẩm/SKU.
 - **Lần import (import batch):** một file được một người dùng tải lên và xử lý.
-- **Tiền sàn chuyển:** số tiền sàn trả cho shop cho một đơn; là doanh thu MVP khi đơn hoàn tất.
+- **Giá bán cuối cùng:** với Shopee MVP, tổng giá gốc của tất cả dòng đơn trừ tổng trợ giá của người bán của tất cả dòng đơn.
+- **Doanh thu thực nhận:** giá bán cuối cùng trừ các chi phí sàn áp dụng của đơn hoàn tất. Với Shopee MVP, các chi phí này là phí cố định, phí dịch vụ và phí xử lý giao dịch.
+- **Thành phần tiền đơn:** một giá trị tiền được import theo đơn hoặc dòng đơn, kèm cột nguồn, phạm vi tổng hợp và phiên bản mapping để có thể diễn giải lại dữ liệu lịch sử khi format export thay đổi.
 - **Trạng thái chuẩn hoá:** trạng thái nội bộ dùng để xác định đơn hoàn tất, được suy ra từ trạng thái gốc theo mapping từng sàn đã xác minh.
 
 ## Open questions
 
-- Template import, mapping file thực tế của Shopee/TikTok và cột tiền sàn chuyển đang **pending** theo quyết định PM; schema import chưa được sử dụng bởi ứng dụng.
+- Mapping TikTok Shop vẫn **pending**; schema import chưa được sử dụng bởi ứng dụng.
 - Chính sách lưu trữ file nguồn chưa được PM xác nhận; MVP chỉ cần lưu metadata và kết quả import.
 
 ## Capital expenditure MVP

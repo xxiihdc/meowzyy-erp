@@ -1,6 +1,8 @@
 erDiagram
   IMPORT_BATCH ||--o{ ORDER : "created or updated"
+  IMPORT_BATCH ||--o{ ORDER_MONETARY_COMPONENT : "sources"
   ORDER ||--o{ ORDER_LINE : contains
+  ORDER ||--o{ ORDER_MONETARY_COMPONENT : has
   ORDER ||--o{ ORDER_FIELD_CHANGE : audited_by
   CAPITAL_CATEGORY ||--o{ CAPITAL_EXPENSE : classifies
   CAPITAL_EXPENSE ||--o{ CAPITAL_EXPENSE_CHANGE : audited_by

@@ -21,12 +21,26 @@
 - Owner / source of truth: File import, trừ các trường được sửa tay.
 - Primary key: `id`.
 - External identifiers: `marketplace`, `marketplace_order_id`; kết hợp là duy nhất.
-- Important attributes: trạng thái gốc/chuẩn hoá, ngày tạo, ngày hoàn tất, tiền sàn chuyển, import batch gần nhất.
-- Relations: Thuộc một import batch gần nhất; có nhiều order lines và order field changes.
-- Invariants and constraints: Một đơn chỉ có một sàn; tiền sàn chuyển không âm khi có giá trị; trạng thái hoàn tất phải có ngày hoàn tất để được tính báo cáo.
+- Important attributes: trạng thái gốc/chuẩn hoá, ngày tạo, ngày hoàn tất, giá bán cuối cùng, doanh thu thực nhận, phiên bản công thức/mapping và import batch gần nhất.
+- Relations: Thuộc một import batch gần nhất; có nhiều order lines, order monetary components và order field changes.
+- Invariants and constraints: Một đơn chỉ có một sàn; trạng thái hoàn tất phải có ngày hoàn tất và đủ thành phần tiền để được tính báo cáo. Doanh thu thực nhận có thể âm khi chi phí sàn lớn hơn giá bán cuối cùng.
 - Lifecycle / mutability: Import mới nhất có thể cập nhật; sửa tay được audit từng trường.
 - Audit and access considerations: Truy vết giá trị trước/sau cho sửa tay.
-- Open questions: Tập thuộc tính lấy từ file sẽ được chốt từ file mẫu.
+- Open questions: Xác nhận cách xử lý số lượng khi một giá trị tiền nguồn không cùng grain với dòng đơn.
+
+## Order monetary component
+
+- Purpose: Giữ từng thành phần tiền đã import và metadata mapping cần để tính, audit và diễn giải lại doanh thu thực nhận.
+- Row grain: Một thành phần tiền của một đơn trong một import batch; thành phần có thể bắt nguồn từ một dòng đơn hoặc toàn đơn.
+- Owner / source of truth: File import gốc và mapping phiên bản đã áp dụng cho batch.
+- Primary key: `id`.
+- External identifiers: Không có.
+- Important attributes: mã thành phần ổn định, số tiền nguồn, tên cột nguồn, phạm vi nguồn, kiểu tổng hợp, phiên bản mapping, cờ có tham gia doanh thu hay chỉ thống kê.
+- Relations: Thuộc một order và một import batch.
+- Invariants and constraints: Không được thay đổi thành phần hoặc phiên bản mapping đã ghi cho một batch hoàn thành; giá gốc và trợ giá người bán Shopee được cộng từ toàn bộ dòng đơn, ba phí Shopee được trừ một lần mỗi đơn; phí vận chuyển không tham gia doanh thu thực nhận.
+- Lifecycle / mutability: Import mới tạo bộ thành phần mới cho dữ liệu nguồn mới; kết quả hiện hành của order dùng batch gần nhất, còn bộ cũ giữ để audit.
+- Audit and access considerations: Không lưu dữ liệu người mua/giao hàng trong entity này.
+- Open questions: Xác nhận quy tắc nguồn cho từng thành phần TikTok Shop và các khoản điều chỉnh hoàn/trả.
 
 ## Order line
 

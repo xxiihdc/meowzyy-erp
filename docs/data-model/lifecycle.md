@@ -12,7 +12,12 @@ File import giữ trạng thái gốc của sàn và chuẩn hoá sang trạng t
 
 ## Derived values
 
-- Đơn được tính báo cáo khi trạng thái chuẩn hoá là hoàn tất, có ngày hoàn tất và tiền sàn chuyển.
+- Đơn được tính báo cáo khi trạng thái chuẩn hoá là hoàn tất, có ngày hoàn tất và đủ dữ liệu để tính doanh thu thực nhận.
+- Với Shopee MVP, giá bán cuối cùng là tổng Giá gốc của tất cả dòng đơn trừ tổng Tổng số tiền được người bán trợ giá của tất cả dòng đơn. Doanh thu thực nhận dùng giá bán cuối cùng trừ các chi phí sàn áp dụng một lần mỗi đơn.
+- Với Shopee MVP, các chi phí được trừ là Phí cố định, Phí Dịch Vụ và Phí xử lý giao dịch.
+- Mỗi batch lưu phiên bản mapping và các thành phần tiền nguồn đã dùng. Khi mapping thay đổi, batch mới dùng phiên bản mới; batch cũ giữ nguyên thành phần và kết quả đã tính để tránh diễn giải lại lịch sử.
+- Phí vận chuyển do người mua trả không tham gia công thức doanh thu thực nhận; giá trị nguồn có thể được lưu theo đơn cho mục đích thống kê.
+- Các thành phần giá bán, trợ giá và chi phí sàn theo đơn cần được giữ để hỗ trợ tính thuế theo đơn ở một phạm vi sau; thuế chưa được tính trong chỉ số hiện tại.
 - Báo cáo lọc theo ngày hoàn tất.
 
 ## Access
